@@ -4,8 +4,6 @@ export function directoryExists(path: string) {
     fs.accessSync(path);
     return true;
   } catch (error) {
-    console.log(error);
-
     return false;
   }
 }

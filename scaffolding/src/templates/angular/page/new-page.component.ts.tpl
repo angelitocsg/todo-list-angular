@@ -10,13 +10,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { BaseComponent } from '../common';
-import { {{ComponentName}}Store } from './todo-page-custom.store';
+import { {{ComponentName}}Store } from './{{file-name}}.store';
 
 @Component({
   standalone: true,
-  selector: 'lib-todo-page-custom',
-  templateUrl: 'todo-page-custom.component.html',
-  styleUrls: ['todo-page-custom.component.scss'],
+  selector: 'lib-{{file-name}}',
+  templateUrl: '{{file-name}}.component.html',
+  styleUrls: ['{{file-name}}.component.scss'],
   imports: [CommonModule, FormsModule, JsonPipe, ReactiveFormsModule],
   providers: [{{ComponentName}}Store],
 })
