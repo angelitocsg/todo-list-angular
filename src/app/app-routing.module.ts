@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TodoPageComponent } from './todo-page/todo-page.component';
+import { TodoPageCustomComponent } from '@my-custom-components-internal';
 
 const routes: Routes = [
   {
     path: 'todo-default',
     component: TodoPageComponent,
+  },
+  {
+    path: 'todo-tobe',
+    component: TodoPageCustomComponent,
   },
 ];
 
