@@ -99,6 +99,39 @@
           }
         }
       }
+    },
+    "my-custom-components": {
+      "projectType": "library",
+      "root": "libraries/my-custom-components",
+      "sourceRoot": "libraries/my-custom-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "libraries/my-custom-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libraries/my-custom-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libraries/my-custom-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "libraries/my-custom-components/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }
