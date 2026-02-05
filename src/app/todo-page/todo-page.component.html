@@ -1,0 +1,59 @@
+<div class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-lg shadow">
+  <header class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-semibold">Todo List</h1>
+    <span class="text-sm text-gray-500">Default version</span>
+  </header>
+
+  <form class="flex gap-2" (submit)="addTodo(); $event.preventDefault()">
+    <input
+      type="text"
+      [(ngModel)]="newTitle"
+      name="title"
+      placeholder="Add a new task..."
+      class="flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+    />
+    <button
+      type="submit"
+      class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+    >
+      Add
+    </button>
+  </form>
+
+  <ul class="mt-4 divide-y">
+    <li
+      *ngFor="let todo of todos; let i = index"
+      class="py-3 flex items-center justify-between"
+    >
+      <div class="flex items-center gap-3">
+        <input
+          type="checkbox"
+          [checked]="todo.done"
+          (change)="toggleDone(i)"
+          class="w-5 h-5 text-indigo-600"
+        />
+        <span [class.line-through]="todo.done" class="text-gray-800">{{
+          todo.title
+        }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          (click)="editTodo(i)"
+          class="text-sm text-indigo-600 hover:underline"
+        >
+          Edit
+        </button>
+        <button
+          (click)="removeTodo(i)"
+          class="text-sm text-red-600 hover:underline"
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <footer class="mt-4 text-sm text-gray-500">
+    <span>{{ todos.length }} items</span>
+  </footer>
+</div>
