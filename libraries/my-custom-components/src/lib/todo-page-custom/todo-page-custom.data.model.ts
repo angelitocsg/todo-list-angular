@@ -9,8 +9,10 @@ export class TodoPageCustomData {
 
   static empty() {
     const element = new TodoPageCustomData();
-    element.title = '...';
+    element.title = '';
     element.done = false;
     return element;
   }
+
+  static parse(externalData: any) {}
 }

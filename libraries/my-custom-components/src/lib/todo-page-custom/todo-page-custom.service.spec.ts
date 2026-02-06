@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MyCustomComponentsService } from './todo-page-custom.service';
+import { TodoPageCustomService } from './todo-page-custom.service';
 
-describe('MyCustomComponentsService', () => {
-  let service: MyCustomComponentsService;
+describe('TodoPageCustomService', () => {
+  let service: TodoPageCustomService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MyCustomComponentsService);
+    service = TestBed.inject(TodoPageCustomService);
   });
 
   it('should be created', () => {

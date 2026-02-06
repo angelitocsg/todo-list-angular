@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-export class BaseStore<T> {
+export class StateStore<T> {
   private _current: BehaviorSubject<T>;
   get current$() {
     return this._current.asObservable();

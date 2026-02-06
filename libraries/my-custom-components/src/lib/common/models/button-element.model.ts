@@ -1,11 +1,11 @@
-import { BaseElement } from './base.element.model';
+import { ElementModel } from './element.model';
 
-export class BaseButtonElement extends BaseElement {
+export class ButtonElementModel extends ElementModel {
   action: string;
   event: () => void;
   disabled: boolean;
 
-  constructor(init?: Partial<BaseButtonElement>) {
+  constructor(init?: Partial<ButtonElementModel>) {
     super(init);
     this.action = init?.action ?? '';
     this.disabled = init?.disabled ?? false;
@@ -13,11 +13,11 @@ export class BaseButtonElement extends BaseElement {
   }
 
   static override create(text: string, show: boolean) {
-    return new BaseButtonElement({ text, show });
+    return new ButtonElementModel({ text, show });
   }
 
   static override empty() {
-    const element = new BaseButtonElement();
+    const element = new ButtonElementModel();
     element.show = false;
     element.text = '';
     element.action = '';

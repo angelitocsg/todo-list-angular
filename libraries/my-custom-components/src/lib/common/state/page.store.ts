@@ -1,7 +1,7 @@
-import { BaseStore } from './base.store';
+import { StateStore } from './state.store';
 
-export class PageStore<TContent, TData> {
-  private _content: BaseStore<TContent>;
+export abstract class PageStore<TContent, TData> {
+  private _content: StateStore<TContent>;
   get content$() {
     return this._content.current$;
   }
@@ -12,7 +12,7 @@ export class PageStore<TContent, TData> {
     this._content.update(content);
   }
 
-  private _data: BaseStore<TData>;
+  private _data: StateStore<TData>;
   get data$() {
     return this._data.current$;
   }
@@ -23,7 +23,7 @@ export class PageStore<TContent, TData> {
     this._data.update(data);
   }
 
-  private _isLoading: BaseStore<boolean> = new BaseStore<boolean>(false);
+  private _isLoading: StateStore<boolean> = new StateStore<boolean>(false);
   get isLoading$() {
     return this._isLoading.current$;
   }
@@ -35,7 +35,7 @@ export class PageStore<TContent, TData> {
   }
 
   constructor(defContent: TContent, defData: TData) {
-    this._content = new BaseStore<TContent>(defContent);
-    this._data = new BaseStore<TData>(defData);
+    this._content = new StateStore<TContent>(defContent);
+    this._data = new StateStore<TData>(defData);
   }
 }
