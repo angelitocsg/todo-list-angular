@@ -43,7 +43,7 @@ export class TodoPageCustomStore extends PageListStore<
     });
   }
 
-  getTodo(index: number) {
+  getTodo(index: number): TodoPageCustomData | undefined {
     const t = this.list.items[index];
     return t;
   }
