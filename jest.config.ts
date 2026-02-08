@@ -56,22 +56,22 @@ const config: Config = {
   // Threshold mínimo de cobertura
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 80,
+      functions: 90,
+      lines: 90,
+      statements: 90,
     },
     './src/app/': {
       branches: 80,
-      functions: 85,
-      lines: 85,
-      statements: 85,
+      functions: 90,
+      lines: 90,
+      statements: 90,
     },
     './libraries/my-custom-components/src/lib/': {
-      branches: 75,
-      functions: 85,
-      lines: 85,
-      statements: 85,
+      branches: 80,
+      functions: 90,
+      lines: 90,
+      statements: 90,
     },
   },
   collectCoverage: true,
