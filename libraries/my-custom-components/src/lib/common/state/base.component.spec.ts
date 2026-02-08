@@ -1,14 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { BaseComponent } from './base.component';
 
-describe('BaseComponent', () => {
+describe('BaseComponent (com inject)', () => {
   let component: TestComponent;
-  let storeMock: any;
+  let storeMock: TestStore;
 
-  class TestComponent extends BaseComponent<any> {
-    setStore(store: any) {
-      this.store = store;
+  class TestStore {
+    content$!: Observable<any>;
+    data$!: Observable<any>;
+    isLoading$!: Observable<any>;
+  }
+
+  class TestComponent extends BaseComponent<TestStore> {
+    constructor() {
+      super(TestStore);
     }
   }
 
@@ -20,15 +26,18 @@ describe('BaseComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      providers: [TestComponent],
+      providers: [TestComponent, { provide: TestStore, useValue: storeMock }],
     });
 
     component = TestBed.inject(TestComponent);
-    component.setStore(storeMock);
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
+  });
+
+  it('deve injetar o store via construtor', () => {
+    expect(component.store).toBe(storeMock);
   });
 
   it('deve expor o observable de conteúdo do store', () => {

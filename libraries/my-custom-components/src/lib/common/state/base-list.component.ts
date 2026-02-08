@@ -1,3 +1,4 @@
+import { Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseComponent } from './base.component';
 
@@ -11,5 +12,8 @@ type StoreType = {
 export abstract class BaseListComponent<T extends StoreType> extends BaseComponent<T> {
   get list$() {
     return this.store.list$;
+  }
+  constructor(storeType: Type<T>) {
+    super(storeType);
   }
 }

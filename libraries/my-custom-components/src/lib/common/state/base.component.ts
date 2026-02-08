@@ -1,3 +1,4 @@
+import { inject, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 
 type StoreType = {
@@ -7,7 +8,7 @@ type StoreType = {
 };
 
 export abstract class BaseComponent<T extends StoreType> {
-  protected store!: T;
+  readonly store: T;
   get content$() {
     return this.store.content$;
   }
@@ -16,5 +17,8 @@ export abstract class BaseComponent<T extends StoreType> {
   }
   get isLoading$() {
     return this.store.isLoading$;
+  }
+  constructor(storeType: Type<T>) {
+    this.store = inject(storeType);
   }
 }
