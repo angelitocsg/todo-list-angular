@@ -1,17 +1,17 @@
-import { ElementModel } from './element.model';
+import { TextElementModel } from './text-element.model';
 
-describe('ElementModel', () => {
+describe('TextElementModel', () => {
   describe('Constructor', () => {
     it('should create an instance with default values when no init provided', () => {
-      const element = new ElementModel();
-      expect(element).toBeInstanceOf(ElementModel);
+      const element = new TextElementModel();
+      expect(element).toBeInstanceOf(TextElementModel);
       expect(element.show).toBe(false);
       expect(element.text).toBe('');
     });
 
     it('should create an instance with provided partial values', () => {
       const init = { show: true, text: 'Hello World' };
-      const element = new ElementModel(init);
+      const element = new TextElementModel(init);
 
       expect(element.show).toBe(true);
       expect(element.text).toBe('Hello World');
@@ -19,7 +19,7 @@ describe('ElementModel', () => {
 
     it('should use default values for undefined properties in init', () => {
       const init = { show: true };
-      const element = new ElementModel(init);
+      const element = new TextElementModel(init);
 
       expect(element.show).toBe(true);
       expect(element.text).toBe('');
@@ -27,7 +27,7 @@ describe('ElementModel', () => {
 
     it('should set show to false when explicitly provided false', () => {
       const init = { show: false, text: 'Test' };
-      const element = new ElementModel(init);
+      const element = new TextElementModel(init);
 
       expect(element.show).toBe(false);
       expect(element.text).toBe('Test');
@@ -35,7 +35,7 @@ describe('ElementModel', () => {
 
     it('should set empty string when text is explicitly empty', () => {
       const init = { show: true, text: '' };
-      const element = new ElementModel(init);
+      const element = new TextElementModel(init);
 
       expect(element.text).toBe('');
       expect(element.show).toBe(true);
@@ -46,9 +46,9 @@ describe('ElementModel', () => {
     it('should create an instance with provided text and show parameters', () => {
       const text = 'Button Text';
       const show = true;
-      const element = ElementModel.create(text, show);
+      const element = TextElementModel.create(text, show);
 
-      expect(element).toBeInstanceOf(ElementModel);
+      expect(element).toBeInstanceOf(TextElementModel);
       expect(element.text).toBe(text);
       expect(element.show).toBe(show);
     });
@@ -56,7 +56,7 @@ describe('ElementModel', () => {
     it('should create with show false when specified', () => {
       const text = 'Hidden Element';
       const show = false;
-      const element = ElementModel.create(text, show);
+      const element = TextElementModel.create(text, show);
 
       expect(element.show).toBe(false);
       expect(element.text).toBe('Hidden Element');
@@ -65,7 +65,7 @@ describe('ElementModel', () => {
     it('should create with empty text string', () => {
       const text = '';
       const show = true;
-      const element = ElementModel.create(text, show);
+      const element = TextElementModel.create(text, show);
 
       expect(element.text).toBe('');
       expect(element.show).toBe(true);
@@ -74,8 +74,8 @@ describe('ElementModel', () => {
     it('should create multiple independent instances', () => {
       const text1 = 'First';
       const text2 = 'Second';
-      const element1 = ElementModel.create(text1, true);
-      const element2 = ElementModel.create(text2, false);
+      const element1 = TextElementModel.create(text1, true);
+      const element2 = TextElementModel.create(text2, false);
 
       expect(element1.text).toBe('First');
       expect(element2.text).toBe('Second');
@@ -86,28 +86,28 @@ describe('ElementModel', () => {
 
   describe('empty static method', () => {
     it('should create an empty instance with default values', () => {
-      const element = ElementModel.empty();
+      const element = TextElementModel.empty();
 
-      expect(element).toBeInstanceOf(ElementModel);
+      expect(element).toBeInstanceOf(TextElementModel);
       expect(element.show).toBe(false);
       expect(element.text).toBe('');
     });
 
     it('should explicitly set show to false', () => {
-      const element = ElementModel.empty();
+      const element = TextElementModel.empty();
 
       expect(element.show).toBe(false);
     });
 
     it('should explicitly set text to empty string', () => {
-      const element = ElementModel.empty();
+      const element = TextElementModel.empty();
 
       expect(element.text).toBe('');
     });
 
     it('should create independent instances with empty method', () => {
-      const element1 = ElementModel.empty();
-      const element2 = ElementModel.empty();
+      const element1 = TextElementModel.empty();
+      const element2 = TextElementModel.empty();
 
       element1.text = 'Modified';
       expect(element2.text).toBe('');
@@ -115,10 +115,10 @@ describe('ElementModel', () => {
     });
 
     it('should reset instance state to empty', () => {
-      const element = ElementModel.create('Text', true);
+      const element = TextElementModel.create('Text', true);
       expect(element.text).toBe('Text');
       expect(element.show).toBe(true);
-      const emptyElement = ElementModel.empty();
+      const emptyElement = TextElementModel.empty();
 
       expect(emptyElement.text).toBe('');
       expect(emptyElement.show).toBe(false);
@@ -127,21 +127,21 @@ describe('ElementModel', () => {
 
   describe('Property mutations', () => {
     it('should allow mutation of show property', () => {
-      const element = new ElementModel();
+      const element = new TextElementModel();
       element.show = true;
 
       expect(element.show).toBe(true);
     });
 
     it('should allow mutation of text property', () => {
-      const element = new ElementModel();
+      const element = new TextElementModel();
       element.text = 'Updated Text';
 
       expect(element.text).toBe('Updated Text');
     });
 
     it('should allow toggling show multiple times', () => {
-      const element = new ElementModel({ show: false });
+      const element = new TextElementModel({ show: false });
       element.show = true;
       expect(element.show).toBe(true);
       element.show = false;
@@ -150,7 +150,7 @@ describe('ElementModel', () => {
     });
 
     it('should allow text replacement', () => {
-      const element = new ElementModel({ text: 'Original' });
+      const element = new TextElementModel({ text: 'Original' });
       element.text = 'Updated';
 
       expect(element.text).toBe('Updated');
@@ -159,14 +159,14 @@ describe('ElementModel', () => {
 
   describe('Type safety', () => {
     it('should maintain type consistency for boolean property', () => {
-      const element = new ElementModel({ show: true });
+      const element = new TextElementModel({ show: true });
       expect(typeof element.show).toBe('boolean');
       element.show = false;
       expect(typeof element.show).toBe('boolean');
     });
 
     it('should maintain type consistency for string property', () => {
-      const element = new ElementModel({ text: 'Hello' });
+      const element = new TextElementModel({ text: 'Hello' });
       expect(typeof element.text).toBe('string');
       element.text = 'World';
       expect(typeof element.text).toBe('string');
@@ -174,14 +174,14 @@ describe('ElementModel', () => {
 
     it('should handle special characters in text', () => {
       const specialText = 'Hello @#$%^&*()_+-=[]{}|;:"<>,.?/';
-      const element = ElementModel.create(specialText, true);
+      const element = TextElementModel.create(specialText, true);
 
       expect(element.text).toBe(specialText);
     });
 
     it('should handle unicode characters in text', () => {
       const unicodeText = '你好世界 🌍 مرحبا بالعالم';
-      const element = ElementModel.create(unicodeText, true);
+      const element = TextElementModel.create(unicodeText, true);
 
       expect(element.text).toBe(unicodeText);
     });
@@ -190,7 +190,7 @@ describe('ElementModel', () => {
   describe('Initialization with null/undefined edge cases', () => {
     it('should treat undefined init as no init parameter', () => {
       const init = undefined;
-      const element = new ElementModel(init);
+      const element = new TextElementModel(init);
 
       expect(element.show).toBe(false);
       expect(element.text).toBe('');
@@ -198,7 +198,7 @@ describe('ElementModel', () => {
 
     it('should handle init with extra properties gracefully', () => {
       const init = { show: true, text: 'Hello', extraProp: 'ignored' };
-      const element = new ElementModel(init as any);
+      const element = new TextElementModel(init as any);
 
       expect(element.show).toBe(true);
       expect(element.text).toBe('Hello');

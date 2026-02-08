@@ -1,12 +1,12 @@
 import { ButtonElementModel } from './button-element.model';
-import { ElementModel } from './element.model';
+import { TextElementModel } from './text-element.model';
 
 describe('ButtonElementModel', () => {
   describe('Constructor', () => {
-    it('should create an instance extending ElementModel', () => {
+    it('should create an instance extending TextElementModel', () => {
       const button = new ButtonElementModel();
       expect(button).toBeInstanceOf(ButtonElementModel);
-      expect(button).toBeInstanceOf(ElementModel);
+      expect(button).toBeInstanceOf(TextElementModel);
     });
 
     it('should initialize with default values when no init provided', () => {
@@ -19,7 +19,7 @@ describe('ButtonElementModel', () => {
       expect(typeof button.event).toBe('function');
     });
 
-    it('should initialize inherited properties from ElementModel', () => {
+    it('should initialize inherited properties from TextElementModel', () => {
       const init = { show: true, text: 'Click me' };
       const button = new ButtonElementModel(init);
       expect(button.show).toBe(true);
@@ -226,7 +226,7 @@ describe('ButtonElementModel', () => {
   });
 
   describe('Inheritance behavior', () => {
-    it('should inherit ElementModel properties', () => {
+    it('should inherit TextElementModel properties', () => {
       const button = new ButtonElementModel({
         show: true,
         text: 'Parent Property',
@@ -248,15 +248,15 @@ describe('ButtonElementModel', () => {
     });
 
     it('should properly override parent static methods', () => {
-      const elementButton = ElementModel.create('Element', true);
+      const elementButton = TextElementModel.create('Element', true);
       const buttonButton = ButtonElementModel.create('Button', true);
 
-      expect(elementButton).toBeInstanceOf(ElementModel);
+      expect(elementButton).toBeInstanceOf(TextElementModel);
       expect(buttonButton).toBeInstanceOf(ButtonElementModel);
-      // ButtonElementModel extends ElementModel, so it's also an instance of ElementModel
-      expect(buttonButton).toBeInstanceOf(ElementModel);
+      // ButtonElementModel extends TextElementModel, so it's also an instance of TextElementModel
+      expect(buttonButton).toBeInstanceOf(TextElementModel);
       // But they are different constructor types
-      expect(elementButton.constructor.name).toBe('ElementModel');
+      expect(elementButton.constructor.name).toBe('TextElementModel');
       expect(buttonButton.constructor.name).toBe('ButtonElementModel');
     });
   });

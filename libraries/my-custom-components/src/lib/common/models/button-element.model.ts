@@ -1,6 +1,6 @@
-import { ElementModel } from './element.model';
+import { TextElementModel } from './text-element.model';
 
-export class ButtonElementModel extends ElementModel {
+export class ButtonElementModel extends TextElementModel {
   action: string;
   event: () => void;
   disabled: boolean;
