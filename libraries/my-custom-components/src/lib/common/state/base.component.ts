@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 type StoreType = {
   content$: Observable<any>;
   data$: Observable<any>;
-  list$: Observable<any>;
   isLoading$: Observable<any>;
 };
 
@@ -15,9 +14,6 @@ export abstract class BaseComponent<T extends StoreType> {
   }
   get data$() {
     return this.store.data$;
-  }
-  get list$() {
-    return this.store.list$;
   }
   get isLoading$() {
     return this.store.isLoading$;

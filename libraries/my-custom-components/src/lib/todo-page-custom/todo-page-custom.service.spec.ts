@@ -6,11 +6,18 @@ describe('TodoPageCustomService', () => {
   let service: TodoPageCustomService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [TodoPageCustomService],
+    });
     service = TestBed.inject(TodoPageCustomService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should be an instance of TodoPageCustomService', () => {
+    expect(service instanceof TodoPageCustomService).toBe(true);
+  });
 });
+

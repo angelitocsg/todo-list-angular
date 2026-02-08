@@ -1,18 +1,18 @@
-export class ElementModel {
+export class TextElementModel {
   show: boolean;
   text: string;
 
-  constructor(init?: Partial<ElementModel>) {
+  constructor(init?: Partial<TextElementModel>) {
     this.show = init?.show ?? false;
     this.text = init?.text ?? '';
   }
 
   static create(text: string, show: boolean) {
-    return new ElementModel({ text, show });
+    return new TextElementModel({ text, show });
   }
 
   static empty() {
-    const element = new ElementModel();
+    const element = new TextElementModel();
     element.show = false;
     element.text = '';
     return element;

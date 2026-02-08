@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-
+import { jsonCastTo } from '../helpers/json.helper';
 export class StateStore<T> {
   private _current: BehaviorSubject<T>;
   get current$() {
@@ -9,8 +9,12 @@ export class StateStore<T> {
     return this._current.value;
   }
   update(input: Partial<T>) {
+    if (typeof input === 'boolean' || typeof input === 'string' || typeof input === 'number') {
+      this._current.next(input);
+      return;
+    }
     this._current.next({
-      ...this.current,
+      ...jsonCastTo<T>(this.current),
       ...input,
     });
   }

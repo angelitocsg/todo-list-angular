@@ -8,7 +8,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BaseComponent, debounce } from '../common';
+import { debounce } from '../common';
+import { LoaderComponent } from '../common/components/loader/loader.component';
+import { BaseListComponent } from '../common/state/base-list.component';
 import { TodoPageCustomStore } from './todo-page-custom.store';
 
 @Component({
@@ -16,11 +18,11 @@ import { TodoPageCustomStore } from './todo-page-custom.store';
   selector: 'lib-todo-page-custom',
   templateUrl: 'todo-page-custom.component.html',
   styleUrls: ['todo-page-custom.component.scss'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, LoaderComponent],
   providers: [TodoPageCustomStore],
 })
 export class TodoPageCustomComponent
-  extends BaseComponent<TodoPageCustomStore>
+  extends BaseListComponent<TodoPageCustomStore>
   implements OnInit
 {
   form!: FormGroup;
@@ -38,12 +40,14 @@ export class TodoPageCustomComponent
     this.form = this.formBuilder.group({
       itemTitle: [this.store.data.title, [Validators.required]],
     });
-    this.form.valueChanges.subscribe((value) => {
-      debounce(() => {
-        this.store.updateData({ title: value.itemTitle });
-      });
+    this.form.valueChanges.subscribe(() => {
+      this.debouncedUpdate();
     });
   }
+
+  private debouncedUpdate = debounce(() => {
+    this.store.updateData({ title: this.form.value.itemTitle });
+  });
 
   // ## EVENTS ######################################################
 

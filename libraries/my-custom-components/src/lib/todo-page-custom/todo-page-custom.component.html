@@ -1,9 +1,15 @@
+<div class="center">
+  <lib-loader [visible]="isLoading$ | async"></lib-loader>
+</div>
+
 <ng-container
-  *ngIf="{
-    list: list$ | async,
-    data: data$ | async,
-    content: content$ | async,
-  } as vm"
+  *ngIf="
+    (isLoading$ | async) === false && {
+      list: list$ | async,
+      data: data$ | async,
+      content: content$ | async,
+    } as vm
+  "
 >
   <div class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-lg shadow">
     <header class="flex items-center justify-between mb-4">
