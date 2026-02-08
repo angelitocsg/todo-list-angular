@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ButtonElementModel, ElementModel, PageListStore } from '../common';
+import { ButtonElementModel, PageListStore, TextElementModel } from '../common';
 import { TodoPageCustomContent } from './todo-page-custom.content.model';
 import { TodoPageCustomData } from './todo-page-custom.data.model';
+import { forkJoin, from, Observable } from 'rxjs';
 
 @Injectable()
 export class TodoPageCustomStore extends PageListStore<
@@ -16,25 +17,43 @@ export class TodoPageCustomStore extends PageListStore<
   }
 
   init() {
-    this.initContent();
-    this.initData();
-  }
-
-  private initContent() {
-    this.updateContent({
-      title: ElementModel.create('Todo List', true),
-      description: ElementModel.create('To be version', true),
-      placeholder: ElementModel.create('Add a new task...', true),
-      itemsLength: ElementModel.create('items', true),
-      addButton: ButtonElementModel.create('add', true),
-      editButton: ButtonElementModel.create('edit', true),
-      deleteButton: ButtonElementModel.create('remove', true),
+    this.setIsLoading(true);
+    forkJoin([this.initContent(), this.initData()]).subscribe(() => {
+      this.setIsLoading(false);
     });
   }
 
-  private initData() {
-    this.updateList({ items: [] });
-    this.updateData(TodoPageCustomData.empty());
+  private initContent(): Observable<boolean> {
+    return from<Promise<boolean>>(
+      new Promise((resolve) => {
+        setTimeout(() => {
+          this.updateContent({
+            title: TextElementModel.create('Todo List', true),
+            description: TextElementModel.create('To be version', true),
+            placeholder: TextElementModel.create('Add a new task...', true),
+            itemsLength: TextElementModel.create('items', true),
+            addButton: ButtonElementModel.create('add', true),
+            editButton: ButtonElementModel.create('edit', true),
+            deleteButton: ButtonElementModel.create('remove', true),
+          });
+          console.info('content loaded');
+          resolve(true);
+        }, 1000);
+      }),
+    );
+  }
+
+  private initData(): Observable<boolean> {
+    return from<Promise<boolean>>(
+      new Promise((resolve) => {
+        setTimeout(() => {
+          console.info('data loaded');
+          resolve(true);
+        }, 2000);
+        // this.updateList({ items: [] });
+        // this.updateData(TodoPageCustomData.empty());
+      }),
+    );
   }
 
   addTodo(input: { title: any }) {
@@ -51,7 +70,7 @@ export class TodoPageCustomStore extends PageListStore<
   updateTitle(index: number, updated: TodoPageCustomData) {
     const t = this.list.items[index];
     const trimmed = updated.title.trim();
-    if (trimmed) t.title = trimmed;
+    if (trimmed && t) t.title = trimmed;
   }
 
   toggleDone(index: number) {

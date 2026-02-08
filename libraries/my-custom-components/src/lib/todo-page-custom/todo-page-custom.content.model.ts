@@ -1,19 +1,19 @@
-import { ButtonElementModel, ElementModel } from '../common';
+import { ButtonElementModel, TextElementModel } from '../common';
 
 export class TodoPageCustomContent {
-  title: ElementModel;
-  description: ElementModel;
-  placeholder: ElementModel;
-  itemsLength: ElementModel;
+  title: TextElementModel;
+  description: TextElementModel;
+  placeholder: TextElementModel;
+  itemsLength: TextElementModel;
   addButton: ButtonElementModel;
   editButton: ButtonElementModel;
   deleteButton: ButtonElementModel;
 
   constructor(init?: Partial<TodoPageCustomContent>) {
-    this.title = init?.title ?? ElementModel.empty();
-    this.description = init?.description ?? ElementModel.empty();
-    this.placeholder = init?.placeholder ?? ElementModel.empty();
-    this.itemsLength = init?.itemsLength ?? ElementModel.empty();
+    this.title = init?.title ?? TextElementModel.empty();
+    this.description = init?.description ?? TextElementModel.empty();
+    this.placeholder = init?.placeholder ?? TextElementModel.empty();
+    this.itemsLength = init?.itemsLength ?? TextElementModel.empty();
     this.addButton = init?.addButton ?? ButtonElementModel.empty();
     this.editButton = init?.addButton ?? ButtonElementModel.empty();
     this.deleteButton = init?.addButton ?? ButtonElementModel.empty();
@@ -21,10 +21,10 @@ export class TodoPageCustomContent {
 
   static empty() {
     return new TodoPageCustomContent({
-      title: ElementModel.empty(),
-      description: ElementModel.empty(),
-      placeholder: ElementModel.empty(),
-      itemsLength: ElementModel.empty(),
+      title: TextElementModel.empty(),
+      description: TextElementModel.empty(),
+      placeholder: TextElementModel.empty(),
+      itemsLength: TextElementModel.empty(),
       addButton: ButtonElementModel.empty(),
       editButton: ButtonElementModel.empty(),
       deleteButton: ButtonElementModel.empty(),
