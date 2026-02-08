@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoPageComponent deve renderizar corretamente o template inicial 1`] = `
+<div
+  id="root0"
+>
+  <div
+    class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-lg shadow"
+  >
+    <header
+      class="flex items-center justify-between mb-4"
+    >
+      <h1
+        class="text-2xl font-semibold"
+      >
+        Todo List
+      </h1>
+      <span
+        class="text-sm text-gray-500"
+      >
+        Default version
+      </span>
+    </header>
+    <form
+      class="flex gap-2 ng-untouched ng-pristine ng-valid"
+      novalidate=""
+    >
+      <input
+        class="flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 ng-untouched ng-pristine ng-valid"
+        name="title"
+        placeholder="Add a new task..."
+        type="text"
+      />
+      <button
+        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+        type="submit"
+      >
+         Add 
+      </button>
+    </form>
+    <ul
+      class="mt-4 divide-y"
+    >
+      
+    </ul>
+    <footer
+      class="mt-4 text-sm text-gray-500"
+    >
+      <span>
+        0 items
+      </span>
+    </footer>
+  </div>
+</div>
+`;
