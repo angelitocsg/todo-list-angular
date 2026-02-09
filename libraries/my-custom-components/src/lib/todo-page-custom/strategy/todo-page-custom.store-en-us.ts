@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ButtonElementModel, PageListStore, TextElementModel } from '../common';
-import { TodoPageCustomContent } from './todo-page-custom.content.model';
-import { TodoPageCustomData } from './todo-page-custom.data.model';
 import { forkJoin, from, Observable } from 'rxjs';
+import { ButtonElementModel, PageListStore, TextElementModel } from '../../common';
+import { TodoPageCustomContent } from '../todo-page-custom.content.model';
+import { TodoPageCustomData } from '../todo-page-custom.data.model';
+import { TodoPageStoreStrategy } from './todo-page.store.strategy';
 
 @Injectable()
-export class TodoPageCustomStore extends PageListStore<
-  TodoPageCustomContent,
-  TodoPageCustomData,
-  { items: TodoPageCustomData[] }
-> {
+export class TodoPageCustomEnUsStore
+  extends PageListStore<TodoPageCustomContent, TodoPageCustomData, { items: TodoPageCustomData[] }>
+  implements TodoPageStoreStrategy
+{
   constructor() {
     super(TodoPageCustomContent.empty(), TodoPageCustomData.empty(), {
       items: [],
@@ -23,20 +23,20 @@ export class TodoPageCustomStore extends PageListStore<
     });
   }
 
-  private initContent(): Observable<boolean> {
+  protected initContent(): Observable<boolean> {
     return from<Promise<boolean>>(
       new Promise((resolve) => {
         setTimeout(() => {
           this.updateContent({
-            title: TextElementModel.create('Todo List', true),
-            description: TextElementModel.create('To be version', true),
-            placeholder: TextElementModel.create('Add a new task...', true),
+            title: TextElementModel.create('ToDo list', true),
+            description: TextElementModel.create('ToBe version', true),
+            placeholder: TextElementModel.create('add a new task', true),
             itemsLength: TextElementModel.create('items', true),
             addButton: ButtonElementModel.create('add', true),
             editButton: ButtonElementModel.create('edit', true),
             deleteButton: ButtonElementModel.create('remove', true),
           });
-          console.info('content loaded');
+          console.info('[store] en-US content loaded!');
           resolve(true);
         }, 1000);
       }),
@@ -47,7 +47,7 @@ export class TodoPageCustomStore extends PageListStore<
     return from<Promise<boolean>>(
       new Promise((resolve) => {
         setTimeout(() => {
-          console.info('data loaded');
+          console.info('[store] data loaded!');
           resolve(true);
         }, 2000);
         // this.updateList({ items: [] });

@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TodoPageCustomEnUsStore } from './strategy/todo-page-custom.store-en-us';
 import { TodoPageCustomComponent } from './todo-page-custom.component';
 import { TodoPageCustomData } from './todo-page-custom.data.model';
-import { TodoPageCustomStore } from './todo-page-custom.store';
 
 describe('TodoPageCustomComponent', () => {
   let component: TodoPageCustomComponent;
   let fixture: ComponentFixture<TodoPageCustomComponent>;
-  let store: TodoPageCustomStore;
+  let store: TodoPageCustomEnUsStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({}).compileComponents();

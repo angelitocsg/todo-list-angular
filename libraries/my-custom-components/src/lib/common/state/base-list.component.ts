@@ -13,7 +13,7 @@ export abstract class BaseListComponent<T extends StoreType> extends BaseCompone
   get list$() {
     return this.store.list$;
   }
-  constructor(storeType: Type<T>) {
-    super(storeType);
+  constructor(store: Type<T> | Record<string, T>, hasStrategy?: boolean) {
+    super(store, hasStrategy);
   }
 }

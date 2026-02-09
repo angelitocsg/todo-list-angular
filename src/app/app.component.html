@@ -1,12 +1,22 @@
 <div class="p-5">
   <a
-    href="/todo-default"
+    routerLink="/todo-default"
     class="default p-2 underline hover:text-blue-600 dark:hover:text-blue-400"
   >
     Default
   </a>
-  <a href="/todo-tobe" class="tobe p-2 underline hover:text-blue-600 dark:hover:text-blue-400">
+  <a
+    routerLink="/todo-tobe"
+    class="tobe p-2 underline hover:text-blue-600 dark:hover:text-blue-400"
+  >
     To be
+  </a>
+  <a
+    routerLink="/"
+    (click)="toggleClick()"
+    class="tobe p-2 underline hover:text-blue-600 dark:hover:text-blue-400"
+  >
+    Toggle
   </a>
 </div>
 <router-outlet></router-outlet>

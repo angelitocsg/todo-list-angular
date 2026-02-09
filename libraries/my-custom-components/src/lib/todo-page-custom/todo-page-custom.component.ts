@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import {
   FormBuilder,
@@ -11,7 +11,14 @@ import {
 import { debounce } from '../common';
 import { LoaderComponent } from '../common/components/loader/loader.component';
 import { BaseListComponent } from '../common/state/base-list.component';
-import { TodoPageCustomStore } from './todo-page-custom.store';
+import { LibraryStore } from '../library.store';
+import { TodoPageCustomEnUsStore } from './strategy/todo-page-custom.store-en-us';
+import { TodoPageCustomPtBrStore } from './strategy/todo-page-custom.store.pt-br';
+import {
+  TODO_STRATEGIES,
+  TodoPageStoreStrategy,
+  TodoStrategyProvider,
+} from './strategy/todo-page.store.strategy';
 
 @Component({
   standalone: true,
@@ -19,16 +26,21 @@ import { TodoPageCustomStore } from './todo-page-custom.store';
   templateUrl: 'todo-page-custom.component.html',
   styleUrls: ['todo-page-custom.component.scss'],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, LoaderComponent],
-  providers: [TodoPageCustomStore],
+  providers: [TodoPageCustomEnUsStore, TodoPageCustomPtBrStore, TodoStrategyProvider],
 })
 export class TodoPageCustomComponent
-  extends BaseListComponent<TodoPageCustomStore>
+  extends BaseListComponent<TodoPageStoreStrategy>
   implements OnInit
 {
   form!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    super(TodoPageCustomStore);
+  constructor(
+    @Inject(TODO_STRATEGIES) strategies: Record<string, TodoPageStoreStrategy>,
+    private libraryStore: LibraryStore,
+    private formBuilder: FormBuilder,
+  ) {
+    super(strategies as Record<string, TodoPageCustomEnUsStore>, true);
+    this.resolveStrategy(this.libraryStore.current.lang);
   }
 
   ngOnInit(): void {

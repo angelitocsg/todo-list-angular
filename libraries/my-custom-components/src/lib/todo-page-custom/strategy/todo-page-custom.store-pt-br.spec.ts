@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { TodoPageCustomStore } from './todo-page-custom.store';
-import { TodoPageCustomData } from './todo-page-custom.data.model';
+import { TodoPageCustomData } from '../todo-page-custom.data.model';
+import { TodoPageCustomPtBrStore } from './todo-page-custom.store.pt-br';
 
 describe('TodoPageCustomStore', () => {
-  let store: TodoPageCustomStore;
+  let store: TodoPageCustomPtBrStore;
 
   beforeEach(() => {
     jest.useFakeTimers();
 
     TestBed.configureTestingModule({
-      providers: [TodoPageCustomStore],
+      providers: [TodoPageCustomPtBrStore],
     });
 
-    store = TestBed.inject(TodoPageCustomStore);
+    store = TestBed.inject(TodoPageCustomPtBrStore);
   });
 
   afterEach(() => {

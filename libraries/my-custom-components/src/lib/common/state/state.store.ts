@@ -1,16 +1,17 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { jsonCastTo } from '../helpers/json.helper';
+
 export class StateStore<T> {
   private _current: BehaviorSubject<T>;
-  get current$() {
+  get current$(): Observable<T> {
     return this._current.asObservable();
   }
-  get current() {
+  get current(): T {
     return this._current.value;
   }
   update(input: Partial<T>) {
-    if (typeof input === 'boolean' || typeof input === 'string' || typeof input === 'number') {
-      this._current.next(input);
+    if (typeof input !== 'object') {
+      this._current.next(input as T);
       return;
     }
     this._current.next({
