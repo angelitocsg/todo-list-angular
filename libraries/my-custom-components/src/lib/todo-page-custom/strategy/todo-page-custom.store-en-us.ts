@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { forkJoin, from, Observable } from 'rxjs';
-import { ButtonElementModel, PageListStore, TextElementModel } from '../../common';
+import { ButtonElement, PageListStore, TextElement } from '../../common';
 import { TodoPageCustomContent } from '../todo-page-custom.content.model';
 import { TodoPageCustomData } from '../todo-page-custom.data.model';
 import { TodoPageStoreStrategy } from './todo-page.store.strategy';
@@ -28,13 +28,13 @@ export class TodoPageCustomEnUsStore
       new Promise((resolve) => {
         setTimeout(() => {
           this.updateContent({
-            title: TextElementModel.create('ToDo list', true),
-            description: TextElementModel.create('ToBe version', true),
-            placeholder: TextElementModel.create('add a new task', true),
-            itemsLength: TextElementModel.create('items', true),
-            addButton: ButtonElementModel.create('add', true),
-            editButton: ButtonElementModel.create('edit', true),
-            deleteButton: ButtonElementModel.create('remove', true),
+            title: TextElement.create('ToDo list'),
+            description: TextElement.create('ToBe version'),
+            placeholder: TextElement.create('add a new task'),
+            itemsLength: TextElement.create('items'),
+            addButton: ButtonElement.create('add'),
+            editButton: ButtonElement.create('edit'),
+            deleteButton: ButtonElement.create('remove'),
           });
           console.info('[store] en-US content loaded!');
           resolve(true);

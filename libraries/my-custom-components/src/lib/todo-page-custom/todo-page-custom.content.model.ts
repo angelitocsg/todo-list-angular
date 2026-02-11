@@ -1,33 +1,33 @@
-import { ButtonElementModel, TextElementModel } from '../common';
+import { ButtonElement, TextElement } from '../common';
 
 export class TodoPageCustomContent {
-  title: TextElementModel;
-  description: TextElementModel;
-  placeholder: TextElementModel;
-  itemsLength: TextElementModel;
-  addButton: ButtonElementModel;
-  editButton: ButtonElementModel;
-  deleteButton: ButtonElementModel;
+  title: TextElement;
+  description: TextElement;
+  placeholder: TextElement;
+  itemsLength: TextElement;
+  addButton: ButtonElement;
+  editButton: ButtonElement;
+  deleteButton: ButtonElement;
 
   constructor(init?: Partial<TodoPageCustomContent>) {
-    this.title = init?.title ?? TextElementModel.empty();
-    this.description = init?.description ?? TextElementModel.empty();
-    this.placeholder = init?.placeholder ?? TextElementModel.empty();
-    this.itemsLength = init?.itemsLength ?? TextElementModel.empty();
-    this.addButton = init?.addButton ?? ButtonElementModel.empty();
-    this.editButton = init?.addButton ?? ButtonElementModel.empty();
-    this.deleteButton = init?.addButton ?? ButtonElementModel.empty();
+    this.title = init?.title ?? TextElement.empty();
+    this.description = init?.description ?? TextElement.empty();
+    this.placeholder = init?.placeholder ?? TextElement.empty();
+    this.itemsLength = init?.itemsLength ?? TextElement.empty();
+    this.addButton = init?.addButton ?? ButtonElement.empty();
+    this.editButton = init?.addButton ?? ButtonElement.empty();
+    this.deleteButton = init?.addButton ?? ButtonElement.empty();
   }
 
   static empty() {
     return new TodoPageCustomContent({
-      title: TextElementModel.empty(),
-      description: TextElementModel.empty(),
-      placeholder: TextElementModel.empty(),
-      itemsLength: TextElementModel.empty(),
-      addButton: ButtonElementModel.empty(),
-      editButton: ButtonElementModel.empty(),
-      deleteButton: ButtonElementModel.empty(),
+      title: TextElement.empty(),
+      description: TextElement.empty(),
+      placeholder: TextElement.empty(),
+      itemsLength: TextElement.empty(),
+      addButton: ButtonElement.empty(),
+      editButton: ButtonElement.empty(),
+      deleteButton: ButtonElement.empty(),
     });
   }
 
