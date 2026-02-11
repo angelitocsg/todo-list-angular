@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StateStore } from './common';
 
 export type LibraryState = {
+  errorContext?: { title: string; message: string };
   lang: 'ptBR' | 'enUS';
 };
 

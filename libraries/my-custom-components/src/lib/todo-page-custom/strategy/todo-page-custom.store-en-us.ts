@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { forkJoin, from, Observable } from 'rxjs';
 import { ButtonElement, PageListStore, TextElement } from '../../common';
 import { TodoPageCustomContent } from '../todo-page-custom.content.model';
@@ -10,7 +11,7 @@ export class TodoPageCustomEnUsStore
   extends PageListStore<TodoPageCustomContent, TodoPageCustomData, { items: TodoPageCustomData[] }>
   implements TodoPageStoreStrategy
 {
-  constructor() {
+  constructor(private router: Router) {
     super(TodoPageCustomContent.empty(), TodoPageCustomData.empty(), {
       items: [],
     });
@@ -18,26 +19,37 @@ export class TodoPageCustomEnUsStore
 
   init() {
     this.setIsLoading(true);
-    forkJoin([this.initContent(), this.initData()]).subscribe(() => {
-      this.setIsLoading(false);
+    forkJoin([this.initContent(), this.initData()]).subscribe({
+      next: () => {
+        this.setIsLoading(false);
+      },
+      error: (err) => {
+        this.router.navigate(['error-page'], { state: { message: err.message } });
+      },
     });
   }
 
   protected initContent(): Observable<boolean> {
     return from<Promise<boolean>>(
-      new Promise((resolve) => {
+      new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.updateContent({
-            title: TextElement.create('ToDo list'),
-            description: TextElement.create('ToBe version'),
-            placeholder: TextElement.create('add a new task'),
-            itemsLength: TextElement.create('items'),
-            addButton: ButtonElement.create('add'),
-            editButton: ButtonElement.create('edit'),
-            deleteButton: ButtonElement.create('remove'),
-          });
-          console.info('[store] en-US content loaded!');
-          resolve(true);
+          try {
+            this.updateContent(
+              new TodoPageCustomContent({
+                title: TextElement.create('ToDo list'),
+                description: TextElement.create('ToBe version'),
+                placeholder: TextElement.create('add a new task'),
+                itemsLength: TextElement.create('items'),
+                addButton: ButtonElement.create('add'),
+                editButton: ButtonElement.create('edit'),
+                deleteButton: ButtonElement.create('remove'),
+              }),
+            );
+            console.info('[store] en-US content loaded!');
+            resolve(true);
+          } catch (e) {
+            reject(e);
+          }
         }, 1000);
       }),
     );
