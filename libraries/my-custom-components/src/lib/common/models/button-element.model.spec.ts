@@ -1,8 +1,8 @@
-import { ButtonElementModel } from './button-element.model';
+import { ButtonElement } from './button-element.model';
 
 describe('ButtonElementModel', () => {
   it('deve criar uma instância com valores padrão quando não recebe init', () => {
-    const model = new ButtonElementModel();
+    const model = new ButtonElement();
 
     expect(model.text).toBe('');
     expect(model.show).toBeFalsy();
@@ -10,7 +10,7 @@ describe('ButtonElementModel', () => {
   });
 
   it('deve inicializar corretamente as propriedades quando recebe init', () => {
-    const model = new ButtonElementModel({
+    const model = new ButtonElement({
       text: 'Salvar',
       show: true,
       disabled: true,
@@ -22,7 +22,7 @@ describe('ButtonElementModel', () => {
   });
 
   it('deve assumir disabled como false quando não informado no init', () => {
-    const model = new ButtonElementModel({
+    const model = new ButtonElement({
       text: 'Cancelar',
       show: true,
     });
@@ -31,31 +31,31 @@ describe('ButtonElementModel', () => {
   });
 
   it('create deve retornar uma instância de ButtonElementModel com text e show definidos', () => {
-    const model = ButtonElementModel.create('Confirmar', true);
+    const model = ButtonElement.create('Confirmar', true);
 
-    expect(model).toBeInstanceOf(ButtonElementModel);
+    expect(model).toBeInstanceOf(ButtonElement);
     expect(model.text).toBe('Confirmar');
     expect(model.show).toBe(true);
     expect(model.disabled).toBe(false);
   });
 
   it('empty deve retornar uma instância vazia e invisível', () => {
-    const model = ButtonElementModel.empty();
+    const model = ButtonElement.empty();
 
-    expect(model).toBeInstanceOf(ButtonElementModel);
+    expect(model).toBeInstanceOf(ButtonElement);
     expect(model.text).toBe('');
     expect(model.show).toBe(false);
     expect(model.disabled).toBe(false);
   });
 
   it('empty deve sempre sobrescrever valores herdados', () => {
-    const model = ButtonElementModel.empty();
+    const model = ButtonElement.empty();
 
     model.text = 'Qualquer';
     model.show = true;
     model.disabled = true;
 
-    const empty = ButtonElementModel.empty();
+    const empty = ButtonElement.empty();
 
     expect(empty.text).toBe('');
     expect(empty.show).toBe(false);

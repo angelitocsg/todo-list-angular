@@ -4,15 +4,17 @@ export abstract class BaseHtmlAttributes {
   errorMessage?: string;
 }
 
-export class InputElementModel<T> extends BaseHtmlAttributes {
+export class InputElement<T> extends BaseHtmlAttributes {
   label: string;
   value: T | null;
   required: boolean;
+  disabled: boolean;
 
-  constructor(init?: Partial<InputElementModel<T>>) {
+  constructor(init?: Partial<InputElement<T>>) {
     super();
     this.label = init?.label ?? '';
     this.value = init?.value ?? null;
     this.required = init?.required ?? false;
+    this.disabled = init?.disabled ?? false;
   }
 }
